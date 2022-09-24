@@ -1,8 +1,10 @@
+#!/usr/bin/python3
+
 import math
 import pygame as pg
 import sys
 import random
-import queue
+
 from collections import OrderedDict 
 
 pg.init()
@@ -494,7 +496,6 @@ def godecA():
     global acheck
     acheck = True
     path, pink, closed =decA(startt, endd)
-    print(pink)
     return path, pink, closed
 
 def godepth():
@@ -760,80 +761,7 @@ pink = []
 aflag = False
 
 while True:
-    if breadthflag:
-        tickspeed = 90
-        if iterroute == len(route):
-            if iterroute > 0:
-                route[iterroute-1].isorange()
-            tickspeed = 20
-            route = []
-            iterroute = 0
-            pathh[iterpath].isslightor()
-            if iterpath > 0:
-                pathh[iterpath-1].isblue()
-            iterpath += 1
-            if iterpath == len(pathh):
-                pathh[iterpath-1].isblue()
-                tickspeed = 60
-                pathh = []
-                iterpath = 0
-                breadthflag = False
-                continue
-            clock.tick(tickspeed)
-            pg.display.update()
-            continue
-        route[iterroute].isslightor()
-        if iterroute > 0:
-            route[iterroute -1].isorange()
-        iterroute +=1
-        clock.tick(tickspeed)
-        pg.display.update()
-        continue
-   
-    if aflag:
-        tickspeed = 70
-        if iterpink == len(pink):
-            if iterpink > 0:
-                pink[iterpink-1].ispink()
-            tickspeed = 60
-            pink = []
-            iterpink = 0
-            if iterroute > 0 and iterroute < len(route):
-                route[iterroute-1].isaqua()
-            if iterroute > 0 and iterroute < len(route):
-                route[iterroute].isslightor()
-            if iterroute == len(route):
-                if iterroute > 0:
-                    route[iterroute-1].isaqua()
-                tickspeed = 30
-                route = []
-                iterroute = 0
-                pathh[iterpath].isslightor()
-                if iterpath > 0:
-                    pathh[iterpath-1].isblue()
-                iterpath += 1
-                clock.tick(tickspeed)
-                pg.display.update()
-                if iterpath == len(pathh):
-                    if iterpath > 0:
-                        pathh[iterpath-1].isblue()
-                    tickspeed = 60
-                    pathh = []
-                    iterpath = 0
-                    acheck = True
-                    aflag = False   
-                continue
-            iterroute += 1
-            clock.tick(tickspeed)
-            pg.display.update()
-            continue
-        pink[iterpink].isslightor()
-        if iterpink > 0:
-            pink[iterpink -1].ispink()
-        iterpink +=1
-        clock.tick(tickspeed)
-        pg.display.update()
-        continue
+
 
 
     siderbar = sidebar()
@@ -875,6 +803,7 @@ while True:
             for j in i:
                 if not j.start and not j.obs:
                     j.isempty()           
+        aflag = False
         endpressed()
         goA()
     if smousedown and startacheck and mx<totalcolumns*rectsizex and acheck:
@@ -882,6 +811,7 @@ while True:
             for j in i:
                 if not j.end and not j.obs:
                     j.isempty()
+        aflag = False
         startpressed()
         goA()
     if emousedown and endacheck and mx<totalcolumns*rectsizex and bcheck:
@@ -955,6 +885,7 @@ while True:
                     siderbar.drawgo2()
                     pathh, pink, route = decA(startt, endd)
                     pink = deleterepeats(pink)
+                    acheck = True
                     aflag = True
                 elif mouse[0] and bcheck:
                     onlypathdelete()
@@ -967,16 +898,13 @@ while True:
                     godepth()
             elif siderbar.Arect.collidepoint(mx, my):
                 if mouse[0] and acheck == False:
-                    print("true")
                     acheck = True
                     bcheck = False
                     dcheck = False
                 elif mouse[2] and acheck == True:
-                    print("Flse")
                     acheck = False
             elif siderbar.Brect.collidepoint(mx, my):
                 if mouse[0] and bcheck == False:
-                    print("true")
                     bcheck = True
                     acheck = False
                     dcheck = False
@@ -995,6 +923,81 @@ while True:
             if event.key == pg.K_t:
                 endpressed()
 
+
+    if breadthflag:
+        tickspeed = 90
+        if iterroute == len(route):
+            if iterroute > 0:
+                route[iterroute-1].isorange()
+            tickspeed = 20
+            route = []
+            iterroute = 0
+            pathh[iterpath].isslightor()
+            if iterpath > 0:
+                pathh[iterpath-1].isblue()
+            iterpath += 1
+            if iterpath == len(pathh):
+                pathh[iterpath-1].isblue()
+                tickspeed = 60
+                pathh = []
+                iterpath = 0
+                breadthflag = False
+                continue
+            clock.tick(tickspeed)
+            pg.display.update()
+            continue
+        route[iterroute].isslightor()
+        if iterroute > 0:
+            route[iterroute -1].isorange()
+        iterroute +=1
+        clock.tick(tickspeed)
+        pg.display.update()
+        continue
+   
+    if aflag:
+        tickspeed = 70
+        if iterpink == len(pink):
+            if iterpink > 0:
+                pink[iterpink-1].ispink()
+            tickspeed = 60
+            pink = []
+            iterpink = 0
+            if iterroute > 0 and iterroute < len(route):
+                route[iterroute-1].isaqua()
+            if iterroute > 0 and iterroute < len(route):
+                route[iterroute].isslightor()
+            if iterroute == len(route):
+                if iterroute > 0:
+                    route[iterroute-1].isaqua()
+                tickspeed = 30
+                route = []
+                iterroute = 0
+                pathh[iterpath].isslightor()
+                if iterpath > 0:
+                    pathh[iterpath-1].isblue()
+                iterpath += 1
+                clock.tick(tickspeed)
+                pg.display.update()
+                if iterpath == len(pathh):
+                    if iterpath > 0:
+                        pathh[iterpath-1].isblue()
+                    tickspeed = 60
+                    pathh = []
+                    iterpath = 0
+                    # acheck = True
+                    aflag = False   
+                continue
+            iterroute += 1
+            clock.tick(tickspeed)
+            pg.display.update()
+            continue
+        pink[iterpink].isslightor()
+        if iterpink > 0:
+            pink[iterpink -1].ispink()
+        iterpink +=1
+        clock.tick(tickspeed)
+        pg.display.update()
+        continue
 
 
     clock.tick(tickspeed)
