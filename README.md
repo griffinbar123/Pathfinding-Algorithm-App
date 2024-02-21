@@ -1,3 +1,5 @@
+This was a visualization tool I made freshman year of college. The code in this project shows some ingenuiety, but also lots of inexperience (specifically in the structure of project). Still, I am happy with the project and what has come of out it.
+
 A* Algorithm
 
 https://github.com/griffinbar123/Pathfinding-Algorithm-App/assets/56204998/a49d4f91-f2fb-4cb3-a96d-0cb17ab85396
